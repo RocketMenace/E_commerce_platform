@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "e-commerce-platform"
+version = "0.1.0"
+description = ""
+authors = ["RocketMenace <grizzlygit777@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "4.2"
+psycopg2-binary = "^2.9.10"
+djangorestframework = "^3.15.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.9.6"
+isort = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
