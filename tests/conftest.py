@@ -1,6 +1,8 @@
-import pytest
-from contacts.models import Contact
 from typing import Any
+
+import pytest
+
+from contacts.models import Contact
 
 
 @pytest.fixture()

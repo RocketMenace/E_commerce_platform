@@ -1,4 +1,5 @@
 from django.db import models
+
 from contacts.models import Contact
 from products.models import Product
 
@@ -10,9 +11,22 @@ class NetworkNode(models.Model):
     contacts = models.OneToOneField(
         Contact, related_name="owner", verbose_name="контакты", on_delete=models.CASCADE
     )
-    products = models.ManyToManyField(Product, related_name="producer", verbose_name="продукты")
-    supplier = models.ForeignKey("self", on_delete=models.SET_NULL, null=True, blank=True, verbose_name="поставщик")
-    debt = models.DecimalField(decimal_places=2, max_digits=12,default=0.00, verbose_name="задолженность перед поставщиком")
+    products = models.ManyToManyField(
+        Product, related_name="producer", verbose_name="продукты"
+    )
+    supplier = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="поставщик",
+    )
+    debt = models.DecimalField(
+        decimal_places=2,
+        max_digits=12,
+        default=0.00,
+        verbose_name="задолженность перед поставщиком",
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="дата создания")
 
     class Meta:
