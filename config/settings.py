@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "retail_network",
     "users",
     # 3rd party,
-    "django_countries"
+    "django_countries",
 ]
 
 MIDDLEWARE = [

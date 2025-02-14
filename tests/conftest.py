@@ -14,6 +14,7 @@ def create_contact_for_test() -> Contact:
     }
     return Contact(**data)
 
+
 @pytest.fixture()
 def create_contact_for_test_with_invalid_country() -> Contact:
     data = {

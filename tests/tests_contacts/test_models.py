@@ -14,6 +14,7 @@ def test_create_contact(create_contact_for_test):
     }
     assert create_contact_for_test.__dict__.items() >= data.items()
 
+
 # def test_create_contact_with_invalid_email(create_contact_for_test_with_invalid_country):
 #
 #     with pytest.raises(ValidationError) as error:
