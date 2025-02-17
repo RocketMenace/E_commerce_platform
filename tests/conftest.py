@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 import pytest
@@ -38,10 +38,10 @@ def create_contact_for_test_with_invalid_country() -> Contact:
 
 
 @pytest.fixture()
-def create_product_for_test() -> Product:
+def create_product_for_test() -> dict[str, Any]:
     data = {
         "name": "Test product",
         "model": "Test model",
-        "release_date": datetime.now(),
+        "release_date": datetime.now().isoformat() + "Z",
     }
-    return Product(**data)
+    return data
