@@ -9,7 +9,10 @@ from products.models import Product
 class NetworkNode(models.Model):
     title = models.CharField(max_length=200, verbose_name="название")
     contacts = models.OneToOneField(
-        Contact, related_name="owner", verbose_name="контакты", on_delete=models.CASCADE
+        Contact,
+        related_name="owner",
+        verbose_name="контакты",
+        on_delete=models.CASCADE,
     )
     products = models.ManyToManyField(
         Product, related_name="producer", verbose_name="продукты"
