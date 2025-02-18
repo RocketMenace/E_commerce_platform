@@ -11,8 +11,6 @@ class ContactInputSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-
-
 class ContactOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
