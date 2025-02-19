@@ -1,3 +1,5 @@
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
@@ -19,6 +21,44 @@ from users.permissions import IsActive
 class NetworkNodeCreateAPIView(APIView):
     permission_classes = [IsAuthenticated & IsActive]
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                "title": openapi.Schema(type=openapi.TYPE_STRING),
+                "contacts": openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "email": openapi.Schema(type=openapi.TYPE_STRING),
+                        "country": openapi.Schema(type=openapi.TYPE_STRING),
+                        "city": openapi.Schema(type=openapi.TYPE_STRING),
+                        "street": openapi.Schema(type=openapi.TYPE_STRING),
+                        "house_number": openapi.Schema(type=openapi.TYPE_STRING),
+                    },
+                ),
+                "products": openapi.Schema(
+                    type=openapi.TYPE_ARRAY,
+                    items=openapi.Schema(
+                        type=openapi.TYPE_OBJECT,
+                        properties={
+                            "name": openapi.Schema(type=openapi.TYPE_STRING),
+                            "model": openapi.Schema(type=openapi.TYPE_STRING),
+                            "release_date": openapi.Schema(
+                                type=openapi.TYPE_STRING, format="date"
+                            ),
+                        },
+                    ),
+                ),
+                "supplier": openapi.Schema(type=openapi.TYPE_INTEGER),
+                "debt": openapi.Schema(type=openapi.TYPE_NUMBER),
+            },
+            required=["title", "contacts", "products"],
+        ),
+        responses={
+            201: openapi.Response("Network node created successfully"),
+            400: "Invalid input",
+        },
+    )
     def post(self, request):
         serializer = NetworkNodeInputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

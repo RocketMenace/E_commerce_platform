@@ -1,3 +1,5 @@
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -18,6 +20,23 @@ from users.permissions import IsActive
 class ContactCreateAPIView(APIView):
     permission_classes = [IsAuthenticated & IsActive]
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                "email": openapi.Schema(type=openapi.TYPE_STRING),
+                "country": openapi.Schema(type=openapi.TYPE_STRING),
+                "city": openapi.Schema(type=openapi.TYPE_STRING),
+                "street": openapi.Schema(type=openapi.TYPE_STRING),
+                "house_number": openapi.Schema(type=openapi.TYPE_INTEGER),
+            },
+            required=["email", "country", "city", "street", "house_number"],
+        ),
+        responses={
+            201: openapi.Response("Contact created successfully"),
+            400: "Invalid input",
+        },
+    )
     def post(self, request) -> Response:
         serializer = ContactInputSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):

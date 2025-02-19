@@ -1,3 +1,5 @@
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -18,6 +20,21 @@ from users.permissions import IsActive
 class ProductCreateAPIView(APIView):
     permission_classes = [IsAuthenticated & IsActive]
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                "name": openapi.Schema(type=openapi.TYPE_STRING),
+                "model": openapi.Schema(type=openapi.TYPE_STRING),
+                "release_date": openapi.Schema(type=openapi.TYPE_STRING, format="date"),
+            },
+            required=["name", "model", "release_date"],
+        ),
+        responses={
+            201: openapi.Response("Product created successfully"),
+            400: "Invalid input",
+        },
+    )
     def post(self, request) -> Response:
         serializer = ProductInputSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
