@@ -48,7 +48,9 @@ class NetworkNode(models.Model):
 
     def supplier_link(self):
         if self.supplier:
-            url = reverse("admin:retail_network_networknode_change", args=[self.supplier.id])
+            url = reverse(
+                "admin:retail_network_networknode_change", args=[self.supplier.id]
+            )
             return format_html('<a href="{}">{}</a>', url, self.supplier.title)
         return "-"
 

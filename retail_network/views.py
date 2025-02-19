@@ -1,16 +1,16 @@
 from rest_framework import status
-from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
-
-from retail_network.serializers import (NetworkNodeInputSerializer,
-                                        NetworkNodeOutputSerializer)
-from retail_network.services import (create_node, delete_node, get_node,
-                                     update_node)
 
 from retail_network.models import NetworkNode
+from retail_network.serializers import (
+    NetworkNodeInputSerializer,
+    NetworkNodeOutputSerializer,
+)
+from retail_network.services import create_node, delete_node, get_node, update_node
 from users.permissions import IsActive
 
 # Create your views here.
@@ -49,13 +49,17 @@ class NetworkNodeUpdateAPIView(APIView):
 
     def put(self, request, node_id):
         serializer = NetworkNodeInputSerializer(data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
         node = update_node(node_id, serializer.validated_data)
         output_serializer = NetworkNodeOutputSerializer(node)
         return Response(data=output_serializer.data, status=status.HTTP_200_OK)
+
 
 class NetworkNodeListAPIView(ListAPIView):
     permission_classes = [IsAuthenticated & IsActive]
     queryset = NetworkNode.objects.all().prefetch_related("contacts")
     serializer_class = NetworkNodeOutputSerializer
-    filter_backends = [SearchFilter, ]
+    filter_backends = [
+        SearchFilter,
+    ]
     search_fields = ["contacts__country"]

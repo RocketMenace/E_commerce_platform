@@ -1,11 +1,13 @@
 from django.urls import path
 
 from retail_network.apps import RetailNetworkConfig
-from retail_network.views import (NetworkNodeCreateAPIView,
-                                  NetworkNodeDeleteAPIView,
-                                  NetworkNodeDetailAPIView,
-                                  NetworkNodeUpdateAPIView,
-                                  NetworkNodeListAPIView)
+from retail_network.views import (
+    NetworkNodeCreateAPIView,
+    NetworkNodeDeleteAPIView,
+    NetworkNodeDetailAPIView,
+    NetworkNodeListAPIView,
+    NetworkNodeUpdateAPIView,
+)
 
 app_name = RetailNetworkConfig.name
 

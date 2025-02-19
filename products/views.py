@@ -3,10 +3,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from products.serializers import (ProductInputSerializer,
-                                  ProductOutputSerializer)
-from products.services import (create_product, delete_product, get_product,
-                               update_product)
+from products.serializers import ProductInputSerializer, ProductOutputSerializer
+from products.services import (
+    create_product,
+    delete_product,
+    get_product,
+    update_product,
+)
 from users.permissions import IsActive
 
 # Create your views here.
