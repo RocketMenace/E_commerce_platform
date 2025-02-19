@@ -7,6 +7,7 @@ from rest_framework import status
 from rest_framework.exceptions import APIException
 
 from products.models import Product
+from products.serializers import ProductUpdateSerializer
 
 
 def create_product(data: dict[str, Any]):
@@ -42,11 +43,16 @@ def get_product(product_id: int):
 
 
 def update_product(product_id: int, data: dict[str, Any]):
-    product = Product.objects.filter(pk=product_id)
-    if not product:
+    try:
+        product = get_object_or_404(Product, pk=product_id)
+    except Http404:
         raise APIException(
             detail=f"Контакт с {product_id=} не существует",
             code=status.HTTP_404_NOT_FOUND,
         )
-    product.update(**data)
+    serializer = ProductUpdateSerializer(instance=product, data=data, partial=True)
+    serializer.is_valid(raise_exception=True)
+    for attr, value in serializer.validated_data.items():
+        setattr(product, attr, value)
+    product.save()
     return product

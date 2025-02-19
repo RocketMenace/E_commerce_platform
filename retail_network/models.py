@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.fields import return_None
+from django.utils.html import format_html
+from rest_framework.reverse import reverse
 
 from contacts.models import Contact
 from products.models import Product
@@ -42,3 +45,12 @@ class NetworkNode(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    def supplier_link(self):
+        if self.supplier:
+            url = reverse("admin:retail_network_networknode_change", args=[self.supplier.id])
+            return format_html('<a href="{}">{}</a>', url, self.supplier.title)
+        return "-"
+
+    def get_city(self):
+        return self.contacts.city

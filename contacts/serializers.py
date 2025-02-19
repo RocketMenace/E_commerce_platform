@@ -11,6 +11,12 @@ class ContactInputSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ContactUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        exclude = ["email"]
+
+
 class ContactOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact

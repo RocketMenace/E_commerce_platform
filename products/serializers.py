@@ -11,6 +11,12 @@ class ProductInputSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ProductUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        exclude = ["model"]
+
+
 class ProductOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product

@@ -23,4 +23,5 @@ urlpatterns = [
     path("contacts/", include("contacts.urls", namespace="contacts")),
     path("products/", include("products.urls", namespace="products")),
     path("retail_network/", include("retail_network.urls", namespace="retail_network")),
+    path("users/", include("users.urls", namespace="users")),
 ]
