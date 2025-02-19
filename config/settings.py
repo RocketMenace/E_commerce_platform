@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django_countries",
     "rest_framework_simplejwt",
     "rest_framework",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
