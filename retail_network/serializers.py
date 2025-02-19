@@ -2,8 +2,7 @@ from rest_framework import serializers
 
 from contacts.models import Contact
 from contacts.serializers import ContactOutputSerializer
-from products.serializers import (ProductInputSerializer,
-                                  ProductOutputSerializer)
+from products.serializers import ProductInputSerializer, ProductOutputSerializer
 from retail_network.models import NetworkNode
 
 

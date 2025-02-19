@@ -3,10 +3,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from contacts.serializers import (ContactInputSerializer,
-                                  ContactOutputSerializer)
-from contacts.services import (create_contact, delete_contact, get_contact,
-                               update_contact)
+from contacts.serializers import ContactInputSerializer, ContactOutputSerializer
+from contacts.services import (
+    create_contact,
+    delete_contact,
+    get_contact,
+    update_contact,
+)
 from users.permissions import IsActive
 
 # Create your views here.

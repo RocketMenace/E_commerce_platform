@@ -1,8 +1,12 @@
 from django.urls import path
 
 from contacts.apps import ContactsConfig
-from contacts.views import (ContactCreateAPIView, ContactDeleteAPIView,
-                            ContactDetailAPIView, ContactUpdateAPIView)
+from contacts.views import (
+    ContactCreateAPIView,
+    ContactDeleteAPIView,
+    ContactDetailAPIView,
+    ContactUpdateAPIView,
+)
 
 app_name = ContactsConfig.name
 
