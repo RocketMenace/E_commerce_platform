@@ -1,9 +1,7 @@
-from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
 from contacts.models import Contact
 from contacts.serializers import ContactOutputSerializer
-from products.models import Product
 from products.serializers import (ProductInputSerializer,
                                   ProductOutputSerializer)
 from retail_network.models import NetworkNode

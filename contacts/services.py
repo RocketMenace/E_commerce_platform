@@ -6,6 +6,7 @@ from rest_framework.exceptions import APIException
 from rest_framework.generics import get_object_or_404
 
 from contacts.models import Contact
+from contacts.serializers import ContactUpdateSerializer
 
 
 def create_contact(data: dict[str, Any]) -> Contact:
@@ -35,11 +36,16 @@ def get_contact(contact_id: int):
 
 
 def update_contact(contact_id: int, data: dict[str, Any]):
-    contact = Contact.objects.filter(pk=contact_id)
-    if not contact:
+    try:
+        contact = get_object_or_404(Contact, pk=contact_id)
+    except Http404:
         raise APIException(
             detail=f"Контакт с {contact_id=} не существует",
             code=status.HTTP_404_NOT_FOUND,
         )
-    contact.update(**data)
+    serializer = ContactUpdateSerializer(instance=contact, data=data, partial=True)
+    serializer.is_valid(raise_exception=True)
+    for attr, value in serializer.validated_data.items():
+        setattr(contact, attr, value)
+    contact.save()
     return contact
