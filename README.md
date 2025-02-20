@@ -20,7 +20,7 @@ This project is a Django REST Framework (DRF) implementation of a hierarchical n
 - **Swagger Documentation**: Interactive API documentation using Swagger UI.
 
 
-## Technologies <a name="techonologies"</a>
+## Technologies <a name="techonologies"></a>
 
 - **Backend**: Django, Django REST Framework (DRF)
 
