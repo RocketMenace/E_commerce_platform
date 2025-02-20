@@ -2,7 +2,8 @@ from rest_framework import serializers
 
 from contacts.models import Contact
 from contacts.serializers import ContactOutputSerializer
-from products.serializers import ProductInputSerializer, ProductOutputSerializer
+from products.serializers import (ProductInputSerializer,
+                                  ProductOutputSerializer)
 from retail_network.models import NetworkNode
 
 
@@ -28,6 +29,7 @@ class NetworkNodeInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = NetworkNode
         fields = ["title", "contacts", "supplier", "products"]
+        read_only_fields = ["debt"]
 
 
 class NetworkNodeOutputSerializer(serializers.ModelSerializer):

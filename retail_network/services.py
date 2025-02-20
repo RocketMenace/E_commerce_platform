@@ -48,11 +48,14 @@ def get_node(node_id: int):
 
 
 def update_node(node_id: int, data: dict[str, Any]):
-    node = NetworkNode.objects.filter(pk=node_id)
-    if not node:
+    try:
+        node = get_object_or_404(NetworkNode, pk=node_id)
+    except Http404:
         raise APIException(
             detail=f"Объект с {node_id=} не существует",
             code=status.HTTP_404_NOT_FOUND,
         )
-    node.update(**data)
+    for attr, value in data.items():
+        setattr(node, attr, value)
+    node.save()
     return node

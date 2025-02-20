@@ -1,6 +1,7 @@
+from datetime import datetime, timedelta, timezone
+
 import pytest
 from rest_framework import status
-from datetime import datetime, timezone, timedelta
 
 
 @pytest.mark.django_db
@@ -54,7 +55,7 @@ def test_delete_retail_network(
 def test_update_retail_network(
     api_client, login_user_for_tests, create_retail_network_for_tests
 ):
-    payload = {"country": "US"}
+    payload = {"title": "The best store"}
     update_response = api_client.put(
         f"/retail_network/update/{create_retail_network_for_tests['id']}",
         data=payload,
