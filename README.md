@@ -89,7 +89,7 @@ The API documentation is available via Swagger UI and ReDoc. You can access it a
 - Swagger UI: http://127.0.0.1:8000/swagger/
 
 - ReDoc: http://127.0.0.1:8000/redoc/
-## Testing <a name="testing"</a>
+## Testing <a name="testing"></a>
 ```python
    pytest
 ```
